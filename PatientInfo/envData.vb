@@ -1,6 +1,6 @@
 ﻿Option Explicit On
 
-Public Class envData
+Friend Class envData
     Private _appPath As String
     Private _appIni As String
     Private _root As String
@@ -9,7 +9,7 @@ Public Class envData
     Private _pId_len As Integer
     Private _pId_chr As Char
 
-    Public Sub New()
+    Friend Sub New()
         _appPath = "C:\PatientInfo"
         _appIni = "\conf\PatientInfo.ini"
         _root = "C:\PatientInfo\root"
@@ -23,7 +23,7 @@ Public Class envData
     ''' アプリ配置先フォルダ
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property appPath() As String
+    Friend ReadOnly Property appPath() As String
         Get
             Return _appPath
         End Get
@@ -33,7 +33,7 @@ Public Class envData
     ''' INIファイル名
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property appIni() As String
+    Friend ReadOnly Property appIni() As String
         Get
             Return _appIni
         End Get
@@ -43,7 +43,7 @@ Public Class envData
     ''' HL7データ出力先ROOTフォルダ
     ''' </summary>
     ''' <returns></returns>
-    Public Property root() As String
+    Friend Property root() As String
         Set(ByVal value As String)
             _root = value
         End Set
@@ -56,7 +56,7 @@ Public Class envData
     ''' エディタ
     ''' </summary>
     ''' <returns></returns>
-    Public Property editorPath() As String
+    Friend Property editorPath() As String
         Set(ByVal value As String)
             _editorPath = value
         End Set
@@ -69,7 +69,7 @@ Public Class envData
     ''' ROOT配下に直接出力
     ''' </summary>
     ''' <returns>True/False</returns>
-    Public Property direct As Boolean
+    Friend Property direct As Boolean
         Set(ByVal value As Boolean)
             _direct = value
         End Set
@@ -82,7 +82,7 @@ Public Class envData
     ''' 患者IDの桁数
     ''' </summary>
     ''' <returns></returns>
-    Public Property pIdlen() As Integer
+    Friend Property pIdlen() As Integer
         Set(ByVal value As Integer)
             _pId_len = value
         End Set
@@ -95,7 +95,7 @@ Public Class envData
     ''' 患者IDの桁埋め文字
     ''' </summary>
     ''' <returns></returns>
-    Public Property pIdchr() As Char
+    Friend Property pIdchr() As Char
         Set(ByVal value As Char)
             _pId_chr = value
         End Set

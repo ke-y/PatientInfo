@@ -4,11 +4,11 @@ Module Common
     ''' <summary>
     ''' 入力内容・形式のチェック
     ''' </summary>
-    ''' <param name="obj"></param>
-    ''' <param name="fmt"></param>
-    Public Sub checkFormat(ByRef obj As Control, ByVal fmt As String)
-        Dim regex As System.Text.RegularExpressions.Regex
-        regex = New System.Text.RegularExpressions.Regex(fmt)
+    ''' <param name="obj">コントロール</param>
+    ''' <param name="fmt">入力内容(正規表現)</param>
+    Friend Sub checkFormat(ByRef obj As Control, ByVal fmt As String)
+        Dim regex As Text.RegularExpressions.Regex
+        regex = New Text.RegularExpressions.Regex(fmt)
 
         If obj.Text = "" Then
         Else
@@ -27,14 +27,14 @@ Module Common
     ''' <param name="pass">対象データ</param>
     ''' <param name="file">True=ファイル、False=ディレクトリ</param>
     ''' <returns>True/False</returns>
-    Public Function checkExists(pass As String, file As Boolean) As Boolean
+    Friend Function checkExists(pass As String, file As Boolean) As Boolean
         If Trim(pass) = "" Then
             checkExists = False
         Else
             If file Then
-                checkExists = System.IO.File.Exists(pass)
+                checkExists = IO.File.Exists(pass)
             Else
-                checkExists = System.IO.Directory.Exists(pass)
+                checkExists = IO.Directory.Exists(pass)
             End If
         End If
     End Function
@@ -46,7 +46,7 @@ Module Common
     ''' <param name="start">開始位置</param>
     ''' <param name="count">文字数</param>
     ''' <returns>文字列</returns>
-    Public Function strMid(str As String, start As Integer, count As Integer) As String
+    Friend Function strMid(str As String, start As Integer, count As Integer) As String
         If Trim(str) = "" Then
             strMid = ""
         ElseIf str.Length < count Then

@@ -107,7 +107,7 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnOpenRoot_Click(sender As Object, e As EventArgs) Handles btnOpenRoot.Click
-        System.Diagnostics.Process.Start(patEnv.root)
+        Process.Start(patEnv.root)
     End Sub
 
     ''' <summary>
@@ -116,9 +116,9 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnMake_Click(sender As Object, e As EventArgs) Handles btnMake.Click
-        Dim sWrite As System.IO.StreamWriter
-        Dim dtNow As DateTime = DateTime.Now
-        Dim regex As System.Text.RegularExpressions.Regex
+        Dim sWrite As IO.StreamWriter
+        Dim dtNow As Date = Date.Now
+        Dim regex As Text.RegularExpressions.Regex
         Dim lstError As List(Of String) = New List(Of String)
         Dim lstOutput As List(Of String) = New List(Of String)
         Dim oldData() As String
@@ -164,14 +164,14 @@ Public Class frmMain
 
         '旧データがある場合は、無効化フラグを立てる
         If checkExists(dataDir, False) Then
-            oldData = System.IO.Directory.GetFiles(dataDir, "*", System.IO.SearchOption.AllDirectories)
+            oldData = IO.Directory.GetFiles(dataDir, "*", IO.SearchOption.AllDirectories)
             fmt = patInfo.pId & "_-_ADT-00_999999999999999_[0-9]{14}_-_1"
-            regex = New System.Text.RegularExpressions.Regex(fmt)
+            regex = New Text.RegularExpressions.Regex(fmt)
             For i = 0 To oldData.Count - 1
                 If regex.IsMatch(oldData(i)) Then
                     rename = strMid(oldData(i), 1, oldData(i).Length - 1)
                     rename = rename & "0"
-                    System.IO.File.Move(oldData(i), rename)
+                    IO.File.Move(oldData(i), rename)
                 End If
             Next
         End If
@@ -185,7 +185,7 @@ Public Class frmMain
         lstOutput.AddRange(patInfo.getOBX)
 
         'ファイル出力
-        System.IO.Directory.CreateDirectory(dataDir)
+        IO.Directory.CreateDirectory(dataDir)
         sWrite = New IO.StreamWriter(dataDir & "\" & dataFile, False, System.Text.Encoding.GetEncoding("iso-2022-jp"))
         For i = 0 To lstOutput.Count - 1
             sWrite.WriteLine(lstOutput.Item(i))
@@ -206,7 +206,7 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub txtPid_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtPid.Validating
-        Dim regex As System.Text.RegularExpressions.Regex
+        Dim regex As Text.RegularExpressions.Regex
         Dim tmpFmt As String
         Dim str As String
 
@@ -216,7 +216,7 @@ Public Class frmMain
         Else
             tmpFmt = "[0-9a-zA-Z]{" & patEnv.pIdlen & "}"
         End If
-        regex = New System.Text.RegularExpressions.Regex(tmpFmt)
+        regex = New Text.RegularExpressions.Regex(tmpFmt)
 
         If txtPid.Text = "" Then
         Else
@@ -237,22 +237,22 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub timPbirth_LostFocus(sender As Object, e As EventArgs) Handles timPbirth.LostFocus
-        Dim baseDay As DateTime
-        Dim today As DateTime
-        Dim dt As DateTime
+        Dim baseDay As Date
+        Dim today As Date
+        Dim dt As Date
         Dim tmpYear As Integer
         Dim tmpMonth As Long
         Dim tmpDay As Integer
 
-        baseDay = DateTime.Parse(timPbirth.Text)
-        today = System.DateTime.Now
+        baseDay = Date.Parse(timPbirth.Text)
+        today = Date.Now
         tmpMonth = DateDiff(DateInterval.Month, baseDay, today)
         '日付をチェック
         If baseDay.Day > today.Day Then
             tmpMonth = tmpMonth - 1
             '前月の末日を計算
             dt = today.AddMonths(-1)
-            tmpDay = System.DateTime.DaysInMonth(today.Year, dt.Month)
+            tmpDay = Date.DaysInMonth(today.Year, dt.Month)
             '末日までの日数を計算
             tmpDay = tmpDay - baseDay.Day
             '当月の日数をプラス
@@ -324,8 +324,8 @@ Public Class frmMain
     ''' </summary>
     Private Sub readIni()
         Dim errList As New List(Of String)
-        Dim sRead As System.IO.StreamReader
-        Dim regex As System.Text.RegularExpressions.Regex
+        Dim sRead As IO.StreamReader
+        Dim regex As Text.RegularExpressions.Regex
         Dim file_pass As String
         Dim str As String
         Dim strTmp() As String
@@ -335,7 +335,7 @@ Public Class frmMain
         file_pass = patEnv.appPath & patEnv.appIni
         If checkExists(file_pass, True) Then
             sRead = New IO.StreamReader(file_pass, System.Text.Encoding.GetEncoding("Shift_JIS"))
-            regex = New System.Text.RegularExpressions.Regex("[a-zA-Z0-9]")
+            regex = New Text.RegularExpressions.Regex("[a-zA-Z0-9]")
 
             Do
                 str = sRead.ReadLine()

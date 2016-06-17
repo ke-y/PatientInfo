@@ -210,3 +210,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/PatientInfo/user/sqlite-netFx35-binary-bundle-Win32-2008-1.0.101.0
+/PatientInfo/user/sqlite-netFx35-binary-bundle-x64-2008-1.0.101.0

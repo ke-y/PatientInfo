@@ -1,6 +1,6 @@
 ﻿Option Explicit On
 
-Public Class patData
+Friend Class patData
     Private _facilityCode As String
     Private _pId As String
     Private _pName_Sei As String
@@ -18,7 +18,7 @@ Public Class patData
     Private _pRh As String
     Private _currentDate As String
 
-    Public Sub New()
+    Friend Sub New()
         _facilityCode = "1"
         _pId = "000000"
         _pName_Sei = "TEST"
