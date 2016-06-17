@@ -3,6 +3,7 @@
 Friend Class envData
     Private _appPath As String
     Private _appIni As String
+    Private _appLog As String
     Private _root As String
     Private _editorPath As String
     Private _direct As Boolean
@@ -12,6 +13,7 @@ Friend Class envData
     Friend Sub New()
         _appPath = "C:\PatientInfo"
         _appIni = "\conf\PatientInfo.ini"
+        _appLog = "\log"
         _root = "C:\PatientInfo\root"
         _editorPath = "C:\Windows\System32\notepad.exe"
         _direct = False
@@ -36,6 +38,12 @@ Friend Class envData
     Friend ReadOnly Property appIni() As String
         Get
             Return _appIni
+        End Get
+    End Property
+
+    Friend ReadOnly Property appLog() As String
+        Get
+            Return _appLog
         End Get
     End Property
 
