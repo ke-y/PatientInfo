@@ -1,11 +1,11 @@
 ========================
-  PatientInfo  Ver.1.1
+  PatientInfo  Ver.1.2
 ========================
 [Name]
 PatientInfo.exe
 
 [Version]
-1.1
+1.2
 
 [Overview]
 Š³Òî•ñ(ADT-00) è“ü—Í/ì¬ƒc[ƒ‹
