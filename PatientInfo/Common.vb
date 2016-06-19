@@ -80,7 +80,7 @@ Module Common
             sWrite = New IO.StreamWriter(pass & "\" & file, False, Text.Encoding.GetEncoding("Shift_JIS"))
         End If
 
-        sWrite.WriteLine(Date.Now.ToString("yyyy/MM/dd hh:mm:ss") & " : " & cmt)
+        sWrite.WriteLine(Date.Now.ToString("yyyy/MM/dd HH:mm:ss") & " : " & cmt)
         sWrite.Close()
     End Sub
 End Module

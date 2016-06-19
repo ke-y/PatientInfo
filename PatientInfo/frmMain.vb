@@ -10,6 +10,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub menuForeDisp_Click(sender As Object, e As EventArgs) Handles menuForeDisp.Click
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Change TopMost value")
+
         If menuForeDisp.Checked Then
             TopMost = True
         Else
@@ -33,6 +35,8 @@ Public Class frmMain
     ''' <param name="e"></param>
     Private Sub menuVersion_Click(sender As Object, e As EventArgs) Handles menuVersion.Click
         Dim frm As New frmVersion()
+
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Disp Version")
 
         frm.ShowDialog(Me)
         frm.Dispose()
@@ -64,6 +68,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub menuEnd_Click(sender As Object, e As EventArgs) Handles menuEnd.Click
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "End System")
+
         Close()
     End Sub
 
@@ -73,6 +79,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Start System")
+
         Text = Application.ProductName & " - MAIN"
 
         'iniファイルの読み込み
@@ -89,6 +97,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnEnd_Click(sender As Object, e As EventArgs) Handles btnEnd.Click
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "End System")
+
         Close()
     End Sub
 
@@ -107,6 +117,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnOpenRoot_Click(sender As Object, e As EventArgs) Handles btnOpenRoot.Click
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Open the Root Dir")
+
         Process.Start(patEnv.root)
     End Sub
 
@@ -128,6 +140,8 @@ Public Class frmMain
         Dim rename As String
         Dim i As Integer
 
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Start HL7 file making")
+
         '必須入力チェック
         lstError = requiredInput()
         If lstError.Count <> 0 Then
@@ -138,6 +152,7 @@ Public Class frmMain
         End If
 
         '画面入力項目をセット
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the input item")
         patInfo.pId = txtPid.Text
         patInfo.pKana_Sei = txtPkana_Sei.Text
         patInfo.pKana_Mei = txtPkana_Mei.Text
@@ -161,8 +176,10 @@ Public Class frmMain
             dataDir = patEnv.root & "\" & patInfo.pId13 & "\" & patInfo.pId46 & "\" & patInfo.pId & "\-\ADT-00"
         End If
         dataFile = patInfo.pId & "_-_ADT-00_999999999999999_" & patInfo.currentDate & "_-_1"
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "FileName = " & dataFile)
 
         '旧データがある場合は、無効化フラグを立てる
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the invalid flag")
         If checkExists(dataDir, False) Then
             oldData = IO.Directory.GetFiles(dataDir, "*", IO.SearchOption.AllDirectories)
             fmt = patInfo.pId & "_-_ADT-00_999999999999999_[0-9]{14}_-_1"
@@ -177,6 +194,7 @@ Public Class frmMain
         End If
 
         'HL7データの作成
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Make HL7 Data")
         lstOutput.Clear()
         lstOutput.Add(patInfo.getMSH)
         lstOutput.Add(patInfo.getEVN)
@@ -191,6 +209,7 @@ Public Class frmMain
             sWrite.WriteLine(lstOutput.Item(i))
         Next
         sWrite.Close()
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Output : " & dataDir & "\" & dataFile)
 
         If checkExists(dataDir & "\" & dataFile, True) Then
             MsgBox("患者情報を出力しました" & vbCrLf & "【出力先】" & vbCrLf & dataDir & vbCrLf & "【ファイル名】" & vbCrLf & dataFile)
@@ -209,6 +228,8 @@ Public Class frmMain
         Dim regex As Text.RegularExpressions.Regex
         Dim tmpFmt As String
         Dim str As String
+
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check Format of Patiend ID")
 
         '入力形式の定義
         If patEnv.pIdchr >= "0"c And patEnv.pIdchr <= "9"c Then
@@ -244,6 +265,8 @@ Public Class frmMain
         Dim tmpMonth As Long
         Dim tmpDay As Integer
 
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Calculation the Patiend Age")
+
         baseDay = Date.Parse(timPbirth.Text)
         today = Date.Now
         tmpMonth = DateDiff(DateInterval.Month, baseDay, today)
@@ -273,6 +296,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub txtZip_Validating(sender As Object, e As EventArgs) Handles txtZip.Validating
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check Format of ZIP")
+
         checkFormat(txtZip, "^\d{3}\-\d{4}$")
     End Sub
 
@@ -282,6 +307,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub txtTel_Validating(sender As Object, e As EventArgs) Handles txtTel.Validating
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check Format of TEL")
+
         checkFormat(txtTel, "\A0\d{1,4}-\d{1,4}-\d{4}\z")
     End Sub
 
@@ -291,6 +318,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub txtHeight_Validating(sender As Object, e As EventArgs) Handles txtHeight.Validating
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check Format of Height")
+
         checkFormat(txtHeight, "^\d{1,3}\.?\d*$")
     End Sub
 
@@ -300,6 +329,8 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub txtWeight_Validating(sender As Object, e As EventArgs) Handles txtWeight.Validating
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check Format of Weight")
+
         checkFormat(txtWeight, "^\d{1,3}\.?\d*$")
     End Sub
 
@@ -309,11 +340,15 @@ Public Class frmMain
     Private Sub openIni()
         Dim file_pass As String
 
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Open the Ini file")
+
         file_pass = patEnv.appPath & patEnv.appIni
         If checkExists(file_pass, True) Then
             Shell(patEnv.editorPath & " " & file_pass, vbNormalFocus)
         Else
             MsgBox(file_pass & "が存在しません" & vbCrLf & "システムを終了します")
+
+            putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Stop System")
             Close()
         End If
 
@@ -331,6 +366,8 @@ Public Class frmMain
         Dim strTmp() As String
         Dim tmpNum As Integer
         Dim i As Integer
+
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Read the Ini file")
 
         file_pass = patEnv.appPath & patEnv.appIni
         If checkExists(file_pass, True) Then
@@ -350,12 +387,16 @@ Public Class frmMain
                             Case "EDITOR"
                                 If checkExists(Trim(strTmp(1)), True) Then
                                     patEnv.editorPath = Trim(strTmp(1))
+
+                                    putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the Editor path")
                                 Else
                                     errList.Add(Trim(strTmp(1)) & "が存在しません")
                                 End If
                             Case "ROOT"
                                 If checkExists(Trim(strTmp(1)), False) Then
                                     patEnv.root = Trim(strTmp(1))
+
+                                    putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the Root dir")
                                 Else
                                     errList.Add(Trim(strTmp(1)) & "が存在しません")
                                 End If
@@ -365,10 +406,14 @@ Public Class frmMain
                                 Else
                                     patEnv.direct = False
                                 End If
+
+                                putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the DIRECT value")
                             Case "PATLEN"
                                 If Integer.TryParse(Trim(strTmp(1)), tmpNum) Then
                                     If tmpNum >= 6 Then
                                         patEnv.pIdlen = tmpNum
+
+                                        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the Patient Length")
                                     Else
                                         errList.Add("患者IDの桁数は6桁以上を指定してください。")
                                     End If
@@ -379,6 +424,8 @@ Public Class frmMain
                                 If Trim(strTmp(1)).Count = 1 Then
                                     If regex.IsMatch(Trim(strTmp(1))) Then
                                         patEnv.pIdchr = Trim(strTmp(1))
+
+                                        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the padding number")
                                     Else
                                         errList.Add("設定値が異常です：FORMAT=[" & Trim(strTmp(1)) & "]")
                                     End If
@@ -388,6 +435,8 @@ Public Class frmMain
                             Case "FACILITY"
                                 If Trim(strTmp(1)) <> "" Then
                                     patInfo.facilityCode = Trim(strTmp(1))
+
+                                    putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Set the Facility Code")
                                 Else
                                     errList.Add("設定値が異常です：FACILITY=[" & Trim(strTmp(1)) & "]")
                                 End If
@@ -398,6 +447,8 @@ Public Class frmMain
             sRead.Close()
         Else
             MsgBox(file_pass & "が存在しません" & vbCrLf & "システムを終了します")
+
+            putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Stop System")
             Close()
         End If
 
@@ -413,6 +464,8 @@ Public Class frmMain
     ''' 入力した画面上の患者情報をクリア
     ''' </summary>
     Private Sub clearPat()
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Clear the input Info")
+
         txtPid.Text = ""
         txtPname_Mei.Text = ""
         txtPname_Sei.Text = ""
@@ -438,6 +491,8 @@ Public Class frmMain
         Dim tmpSex() As String = {"", "男", "女", "未知", "その他"}
         Dim tmpAbo() As String = {"", "A", "B", "O", "AB", "不明"}
         Dim tmpRh() As String = {"", "+", "-", "不明"}
+
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Initialize Input item")
 
         '患者ID
         txtPid.MaxLength = patEnv.pIdlen
@@ -478,7 +533,6 @@ Public Class frmMain
         cmbAbo.Items.AddRange(tmpAbo)
         cmbRh.Items.Clear()
         cmbRh.Items.AddRange(tmpRh)
-
     End Sub
 
     ''' <summary>
@@ -487,6 +541,8 @@ Public Class frmMain
     ''' <returns></returns>
     Private Function requiredInput() As List(Of String)
         requiredInput = New List(Of String)
+
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Check the Required Item")
 
         If txtPid.Text = "" Then
             requiredInput.Add("患者IDが未入力です")
