@@ -5,7 +5,7 @@ Public Class frmMain
     Private patEnv As New envData
 
     ''' <summary>
-    ''' メニュー：最善面に表示
+    ''' メニュー：最前面に表示
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
