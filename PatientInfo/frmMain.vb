@@ -464,6 +464,14 @@ Public Class frmMain
             Close()
         End If
 
+        file_pass = patEnv.appPath & patEnv.zipDb
+        If checkExists(file_pass, True) Then
+            btnZip.Enabled = True
+        Else
+            errList.Add("郵便番号DBが存在しないため、機能を無効にします [" & Trim(file_pass) & "]")
+            btnZip.Enabled = False
+        End If
+
         If errList.Count > 0 Then
             For i = 0 To errList.Count - 1
                 MsgBox(errList.Item(i))

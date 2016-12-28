@@ -4,6 +4,7 @@ Friend Class envData
     Private _appPath As String
     Private _appIni As String
     Private _appLog As String
+    Private _zipDb As String
     Private _root As String
     Private _editorPath As String
     Private _direct As Boolean
@@ -14,6 +15,7 @@ Friend Class envData
         _appPath = "C:\PatientInfo"
         _appIni = "\conf\PatientInfo.ini"
         _appLog = "\log"
+        _zipDb = "\conf\zip.sqlite"
         _root = "C:\PatientInfo\root"
         _editorPath = "C:\Windows\System32\notepad.exe"
         _direct = False
@@ -41,9 +43,23 @@ Friend Class envData
         End Get
     End Property
 
+    ''' <summary>
+    ''' ログ出力フォルダ
+    ''' </summary>
+    ''' <returns></returns>
     Friend ReadOnly Property appLog() As String
         Get
             Return _appLog
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' 郵便番号DB格納先
+    ''' </summary>
+    ''' <returns></returns>
+    Friend ReadOnly Property zipDb() As String
+        Get
+            Return _zipDb
         End Get
     End Property
 
