@@ -129,9 +129,11 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnZip_Click(sender As Object, e As EventArgs) Handles btnZip.Click
-        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Address from ZIP CODE")
+        If Trim(txtZip.Text) <> "" Then
+            putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Address from ZIP CODE")
 
-        zipData.getZip(strMid(txtZip.Text, 1, 3) & strMid(txtZip.Text, 5, 4))
+            zipData.getZip(strMid(txtZip.Text, 1, 3) & strMid(txtZip.Text, 5, 4))
+        End If
     End Sub
 
     ''' <summary>
