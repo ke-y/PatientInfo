@@ -55,26 +55,26 @@ Friend Class dbConnect
         Return False
     End Function
 
-    Friend Sub getZip(ByVal zipCode As String)
+    Friend Function getZip(ByVal zipCode As String) As String
         Dim dtTbl = New DataTable
         Dim strSql As String
+        Dim ret As String
 
-        'Open処理
         Open()
-
         'SQLの実行
         If _conn.State <> ConnectionState.Open Then
             dtTbl = Nothing
+            ret = ""
         Else
             strSql = "select ken,shi,machi from zip where zip=" & zipCode
             _adp = New SQLiteDataAdapter(strSql, _conn)
             _adp.Fill(dtTbl)
+            ret = ""
         End If
-
-        'Close処理
         Close()
-
         dtTbl = Nothing
-    End Sub
+
+        Return ret
+    End Function
 
 End Class
