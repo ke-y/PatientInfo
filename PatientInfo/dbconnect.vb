@@ -55,22 +55,33 @@ Friend Class dbConnect
         Return False
     End Function
 
-    Friend Function getZip(ByVal zipCode As String) As String
+    ''' <summary>
+    ''' 郵便番号から住所を検索
+    ''' </summary>
+    ''' <param name="zipCode">郵便番号(XXXYYYY)</param>
+    ''' <returns></returns>
+    Friend Function getZip(ByVal zipCode As String, ByVal oldAddress As String) As String
         Dim dtTbl = New DataTable
         Dim strSql As String
         Dim ret As String
 
-        Open()
+        ret = ""
         'SQLの実行
-        If _conn.State <> ConnectionState.Open Then
-            dtTbl = Nothing
-            ret = ""
-        Else
+        If Open() Then
             strSql = "select ken,shi,machi from zip where zip=" & zipCode
             _adp = New SQLiteDataAdapter(strSql, _conn)
             _adp.Fill(dtTbl)
-            ret = ""
+
+            If dtTbl.Rows.Count > 0 Then
+                For i As Integer = 0 To 2
+                    ret = ret & dtTbl.Rows(0).Item(i).ToString
+                Next i
+            Else
+                '検索結果が見つからない場合は、元の住所を保持
+                ret = oldAddress
+            End If
         End If
+
         Close()
         dtTbl = Nothing
 
