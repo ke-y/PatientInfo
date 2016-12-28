@@ -1,6 +1,6 @@
 ﻿Option Explicit On
 
-Friend Class dbconnect
+Friend Class dbConnect
 
     Private _conn As SQLiteConnection
     Private _cmd As SQLiteCommand

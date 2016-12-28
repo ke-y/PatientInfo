@@ -3,7 +3,7 @@
 Public Class frmMain
     Private patInfo As New patData
     Private patEnv As New envData
-    Private zipData As New dbconnect
+    Private zipData As New dbConnect
 
     ''' <summary>
     ''' メニュー：最前面に表示
