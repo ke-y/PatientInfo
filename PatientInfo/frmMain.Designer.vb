@@ -68,6 +68,7 @@ Partial Class frmMain
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.btnZip = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -331,7 +332,7 @@ Partial Class frmMain
         '
         Me.txtTel.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.txtTel.ImeMode = System.Windows.Forms.ImeMode.Disable
-        Me.txtTel.Location = New System.Drawing.Point(282, 144)
+        Me.txtTel.Location = New System.Drawing.Point(400, 144)
         Me.txtTel.MaxLength = 8
         Me.txtTel.Name = "txtTel"
         Me.txtTel.Size = New System.Drawing.Size(154, 23)
@@ -412,7 +413,7 @@ Partial Class frmMain
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("MS UI Gothic", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(204, 147)
+        Me.Label11.Location = New System.Drawing.Point(320, 147)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(72, 16)
         Me.Label11.TabIndex = 27
@@ -482,6 +483,18 @@ Partial Class frmMain
         Me.Label13.TabIndex = 55
         Me.Label13.Text = "kg"
         '
+        'btnZip
+        '
+        Me.btnZip.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnZip.CausesValidation = False
+        Me.btnZip.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnZip.Location = New System.Drawing.Point(195, 144)
+        Me.btnZip.Name = "btnZip"
+        Me.btnZip.Size = New System.Drawing.Size(69, 23)
+        Me.btnZip.TabIndex = 9
+        Me.btnZip.Text = "検索"
+        Me.btnZip.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -489,6 +502,7 @@ Partial Class frmMain
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(186, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.CausesValidation = False
         Me.ClientSize = New System.Drawing.Size(756, 275)
+        Me.Controls.Add(Me.btnZip)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.btnOpenRoot)
@@ -580,4 +594,5 @@ Partial Class frmMain
     Friend WithEvents menuPatClear As ToolStripMenuItem
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents btnZip As Button
 End Class

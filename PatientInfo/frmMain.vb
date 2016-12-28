@@ -122,6 +122,10 @@ Public Class frmMain
         Process.Start(patEnv.root)
     End Sub
 
+    Private Sub btnZip_Click(sender As Object, e As EventArgs) Handles btnZip.Click
+
+    End Sub
+
     ''' <summary>
     ''' HL7データを作成
     ''' </summary>
