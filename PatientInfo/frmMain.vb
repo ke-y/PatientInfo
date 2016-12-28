@@ -3,6 +3,7 @@
 Public Class frmMain
     Private patInfo As New patData
     Private patEnv As New envData
+    Private zipData As New dbconnect
 
     ''' <summary>
     ''' メニュー：最前面に表示
@@ -123,7 +124,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnZip_Click(sender As Object, e As EventArgs) Handles btnZip.Click
-
+        zipData.getZip(txtZip.Text)
     End Sub
 
     ''' <summary>
