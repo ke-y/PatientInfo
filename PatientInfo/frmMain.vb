@@ -133,6 +133,7 @@ Public Class frmMain
             putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Address from ZIP CODE")
 
             txtAddress1.Text = zipData.getZip(strMid(txtZip.Text, 1, 3) & strMid(txtZip.Text, 5, 4), txtAddress1.Text)
+            txtAddress2.Text = ""
         End If
     End Sub
 

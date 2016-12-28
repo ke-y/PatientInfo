@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		PatientInfo\user\PatientInfo.ini = PatientInfo\user\PatientInfo.ini
 		PatientInfo\user\readme.txt = PatientInfo\user\readme.txt
+		PatientInfo\user\System.Data.SQLite.dll = PatientInfo\user\System.Data.SQLite.dll
 		PatientInfo\user\zip.sql = PatientInfo\user\zip.sql
 		PatientInfo\user\zip_index.sql = PatientInfo\user\zip_index.sql
 		PatientInfo\user\zip_make.cmd = PatientInfo\user\zip_make.cmd
@@ -26,8 +27,8 @@ Global
 		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Debug|x86.ActiveCfg = Debug|x86
 		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Debug|x86.Build.0 = Debug|x86
-		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|Any CPU.ActiveCfg = Release|x86
+		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|Any CPU.Build.0 = Release|x86
 		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|x86.ActiveCfg = Release|x86
 		{F380931E-CD73-4366-BA24-D5BFACEFACFD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
