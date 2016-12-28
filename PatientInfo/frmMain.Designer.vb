@@ -486,7 +486,6 @@ Partial Class frmMain
         'btnZip
         '
         Me.btnZip.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnZip.CausesValidation = False
         Me.btnZip.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnZip.Location = New System.Drawing.Point(195, 144)
         Me.btnZip.Name = "btnZip"

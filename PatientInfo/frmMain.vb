@@ -123,8 +123,15 @@ Public Class frmMain
         Process.Start(patEnv.root)
     End Sub
 
+    ''' <summary>
+    ''' 郵便番号から住所を検索
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnZip_Click(sender As Object, e As EventArgs) Handles btnZip.Click
-        zipData.getZip(txtZip.Text)
+        putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Address from ZIP CODE")
+
+        zipData.getZip(strMid(txtZip.Text, 1, 3) & strMid(txtZip.Text, 5, 4))
     End Sub
 
     ''' <summary>
