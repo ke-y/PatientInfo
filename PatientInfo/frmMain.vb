@@ -261,6 +261,7 @@ Public Class frmMain
                 txtPid.Text = str
             Else
                 MsgBox("不正な値が入力されています：患者ID=[" & txtPid.Text & "]")
+                txtPid.Text = ""
                 e.Cancel = True
             End If
         End If
