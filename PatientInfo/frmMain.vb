@@ -137,6 +137,67 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub btnId_Click(sender As Object, e As EventArgs) Handles btnId.Click
+        Dim strTmp() As String
+
+        If Trim(txtPid.Text) <> "" Then
+            putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Patient Information")
+
+            patInfo.pId = txtPid.Text
+            If patInfo.setPatData Then
+                txtPid.Text = patInfo.pId
+                txtPkana_Sei.Text = patInfo.pKana_Sei
+                txtPkana_Mei.Text = patInfo.pKana_Mei
+                txtPname_Sei.Text = patInfo.pName_Sei
+                txtPname_Mei.Text = patInfo.pName_Mei
+                timPbirth.Text = strMid(patInfo.pBirth, 1, 4) & "/" & strMid(patInfo.pBirth, 5, 2) & "/" & strMid(patInfo.pBirth, 7, 2)
+                Select Case patInfo.pSex
+                    Case "M"
+                        cmbPsex.SelectedItem = "男"
+                    Case "F"
+                        cmbPsex.SelectedItem = "女"
+                    Case "U"
+                        cmbPsex.SelectedItem = "未知"
+                    Case "O"
+                        cmbPsex.SelectedItem = "その他"
+                End Select
+                txtZip.Text = patInfo.pZip
+                txtTel.Text = patInfo.pTel
+                strTmp = Split(patInfo.pAddress, " ")
+                If strTmp.Length > 1 Then
+                    txtAddress1.Text = strTmp(0)
+                    txtAddress2.Text = strTmp(1)
+                Else
+                    txtAddress1.Text = strTmp(0)
+                End If
+                txtHeight.Text = patInfo.pHeight
+                txtWeight.Text = patInfo.pWeight
+                Select Case patInfo.pAbo
+                    Case "A"
+                        cmbAbo.SelectedItem = "A"
+                    Case "B"
+                        cmbAbo.SelectedItem = "B"
+                    Case "O"
+                        cmbAbo.SelectedItem = "O"
+                    Case "AB"
+                        cmbAbo.SelectedItem = "AB"
+                    Case "U"
+                        cmbAbo.SelectedItem = "不明"
+                End Select
+                Select Case patInfo.pRh
+                    Case "+"
+                        cmbRh.SelectedItem = "+"
+                    Case "-"
+                        cmbRh.SelectedItem = "-"
+                    Case "U"
+                        cmbRh.SelectedItem = "不明"
+                End Select
+            Else
+                clearPat(True)
+            End If
+        End If
+    End Sub
+
     ''' <summary>
     ''' HL7データを作成
     ''' </summary>
@@ -488,10 +549,12 @@ Public Class frmMain
     ''' <summary>
     ''' 入力した画面上の患者情報をクリア
     ''' </summary>
-    Private Sub clearPat()
+    Private Sub clearPat(Optional ByVal exceptId As Boolean = False)
         putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Clear the input Info")
 
-        txtPid.Text = ""
+        If Not exceptId Then
+            txtPid.Text = ""
+        End If
         txtPname_Mei.Text = ""
         txtPname_Sei.Text = ""
         txtPkana_Mei.Text = ""

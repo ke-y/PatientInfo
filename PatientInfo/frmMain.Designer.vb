@@ -69,6 +69,7 @@ Partial Class frmMain
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.btnZip = New System.Windows.Forms.Button()
+        Me.btnId = New System.Windows.Forms.Button()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -494,6 +495,17 @@ Partial Class frmMain
         Me.btnZip.Text = "検索"
         Me.btnZip.UseVisualStyleBackColor = False
         '
+        'btnId
+        '
+        Me.btnId.BackColor = System.Drawing.SystemColors.ButtonFace
+        Me.btnId.Font = New System.Drawing.Font("MS UI Gothic", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnId.Location = New System.Drawing.Point(265, 36)
+        Me.btnId.Name = "btnId"
+        Me.btnId.Size = New System.Drawing.Size(69, 23)
+        Me.btnId.TabIndex = 56
+        Me.btnId.Text = "検索"
+        Me.btnId.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -501,6 +513,7 @@ Partial Class frmMain
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(186, Byte), Integer), CType(CType(211, Byte), Integer), CType(CType(243, Byte), Integer))
         Me.CausesValidation = False
         Me.ClientSize = New System.Drawing.Size(756, 275)
+        Me.Controls.Add(Me.btnId)
         Me.Controls.Add(Me.btnZip)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Label12)
@@ -594,4 +607,5 @@ Partial Class frmMain
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents btnZip As Button
+    Friend WithEvents btnId As Button
 End Class
