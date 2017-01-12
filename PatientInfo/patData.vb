@@ -1,4 +1,5 @@
 ﻿Option Explicit On
+Imports System.IO
 
 Friend Class patData
     Private _facilityCode As String
@@ -329,6 +330,7 @@ Friend Class patData
                         End If
                     End If
                 Next
+                setPatient(tmpFile)
 
                 Return True
             Else
@@ -342,4 +344,69 @@ Friend Class patData
 
     End Function
 
+    Private Sub setPatient(ByRef tmpFile As FileInfo)
+        Dim sRead As IO.StreamReader
+        Dim strLine As String
+        Dim strAttr() As String
+        Dim strItem() As String
+
+        sRead = New IO.StreamReader(tmpFile.FullName, System.Text.Encoding.GetEncoding("iso-2022-jp"))
+        Do
+            strLine = sRead.ReadLine()
+            If strLine Is Nothing Then
+                Exit Do
+            End If
+
+            strAttr = Split(strLine, "|")
+            If strAttr(0) = "PID" Then
+                strItem = Split(strAttr(5), "^")
+                'pName_Sei^pName_Mei^^^^^L^I~pKana_Sei^pKana_Mei^^^^^L^P
+                '患者姓
+                pName_Sei = strItem(0)
+                '患者名
+                pName_Mei = strItem(1)
+                '患者カナ姓
+                pKana_Sei = strItem(7).Substring(2)
+                '患者カナ名
+                pKana_Mei = strItem(8)
+
+                '生年月日
+                _pBirth = strAttr(7)
+                '性別
+                pSex = strAttr(8)
+
+                strItem = Split(strAttr(11), "^")
+                '^^^^pZip^JPN^H^pAddress
+                '郵便番号
+                pZip = strItem(4)
+                '住所
+                pAddress = strItem(7)
+
+                strItem = Split(strAttr(13), "^")
+                '^PRN^PH^^^^^^^^^pTel
+                '電話番号
+                pTel = strItem(11)
+            End If
+            If strAttr(0) = "OBX" Then
+                strItem = Split(strAttr(3), "^")
+                If strItem(0) = "9N001000000000001" Then
+                    '身長
+                    pHeight = strAttr(5)
+                ElseIf strItem(0) = "9N006000000000001" Then
+                    '体重
+                    pWeight = strAttr(5)
+                ElseIf strItem(0) = "5H010000001999911" Then
+                    '血液型ABO
+                    strItem = Split(strAttr(5), "^")
+                    pAbo = strItem(0)
+                ElseIf strItem(0) = "5H020000001999911" Then
+                    '血液型RH
+                    strItem = Split(strAttr(5), "^")
+                    pRh = strItem(0)
+                End If
+            End If
+        Loop
+        sRead.Close()
+
+    End Sub
 End Class
