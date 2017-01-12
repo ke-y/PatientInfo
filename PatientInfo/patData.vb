@@ -350,6 +350,21 @@ Friend Class patData
         Dim strAttr() As String
         Dim strItem() As String
 
+        '初期化
+        pName_Sei = ""
+        pName_Mei = ""
+        pKana_Sei = ""
+        pKana_Mei = ""
+        pBirth = ""
+        pSex = ""
+        pZip = ""
+        pAddress = ""
+        pTel = ""
+        pHeight = ""
+        pWeight = ""
+        pAbo = ""
+        pRh = ""
+
         sRead = New IO.StreamReader(tmpFile.FullName, System.Text.Encoding.GetEncoding("iso-2022-jp"))
         Do
             strLine = sRead.ReadLine()
@@ -373,7 +388,7 @@ Friend Class patData
                 '生年月日
                 _pBirth = strAttr(7)
                 '性別
-                pSex = strAttr(8)
+                _pSex = strAttr(8)
 
                 strItem = Split(strAttr(11), "^")
                 '^^^^pZip^JPN^H^pAddress

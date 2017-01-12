@@ -188,6 +188,8 @@ Public Class frmMain
                         cmbAbo.SelectedItem = "AB"
                     Case "U"
                         cmbAbo.SelectedItem = "不明"
+                    Case Else
+                        cmbAbo.SelectedItem = ""
                 End Select
                 Select Case patInfo.pRh
                     Case "+"
@@ -196,6 +198,8 @@ Public Class frmMain
                         cmbRh.SelectedItem = "-"
                     Case "U"
                         cmbRh.SelectedItem = "不明"
+                    Case Else
+                        cmbRh.SelectedItem = ""
                 End Select
             Else
                 clearPat(True)
