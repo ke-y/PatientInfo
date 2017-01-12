@@ -137,6 +137,11 @@ Public Class frmMain
         End If
     End Sub
 
+    ''' <summary>
+    ''' 作成済み患者情報を画面に反映
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnId_Click(sender As Object, e As EventArgs) Handles btnId.Click
         Dim strTmp() As String
 
@@ -144,7 +149,7 @@ Public Class frmMain
             putLog(patEnv.appPath & "\" & patEnv.appLog, My.Application.Info.ProductName & "_" & Date.Now.ToString("yyyyMMdd") & ".log", "Search the Patient Information")
 
             patInfo.pId = txtPid.Text
-            If patInfo.setPatData Then
+            If patInfo.setPatData(patEnv.root, patEnv.direct) Then
                 txtPid.Text = patInfo.pId
                 txtPkana_Sei.Text = patInfo.pKana_Sei
                 txtPkana_Mei.Text = patInfo.pKana_Mei

@@ -295,4 +295,51 @@ Friend Class patData
         End Get
     End Property
 
+    Friend Function setPatData(ByVal root As String, ByVal direct As Boolean) As Boolean
+        Dim dirInfo As IO.DirectoryInfo
+        Dim allFile As IO.FileInfo()
+        Dim tmpFile As IO.FileInfo
+        Dim dataDir As String
+        Dim strPattern As String
+
+        '検索条件の設定
+        If direct Then
+            dataDir = root
+        Else
+            dataDir = root & "\" & pId13 & "\" & pId46 & "\" & pId & "\-\ADT-00"
+        End If
+        strPattern = pId & "_-_ADT-00_*_1"
+
+        '初期化
+        dirInfo = New IO.DirectoryInfo(dataDir)
+        allFile = Nothing
+        tmpFile = Nothing
+
+        '検索パターンに合致するファイルを全検索
+        If checkExists(dataDir, False) Then
+            allFile = dirInfo.GetFiles(strPattern)
+            If allFile.Length > 0 Then
+                For Each f As IO.FileInfo In allFile
+                    If tmpFile Is Nothing Then
+                        tmpFile = f
+                    Else
+                        ' date1 > date2 (新しい): 1
+                        If Date.Compare(f.LastWriteTime, tmpFile.LastWriteTime) = 1 Then
+                            tmpFile = f
+                        End If
+                    End If
+                Next
+
+                Return True
+            Else
+                '有効ファイルがない
+                Return False
+            End If
+        Else
+            'フォルダそのものが存在しない
+            Return False
+        End If
+
+    End Function
+
 End Class
