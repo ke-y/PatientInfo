@@ -155,7 +155,9 @@ Public Class frmMain
                 txtPkana_Mei.Text = patInfo.pKana_Mei
                 txtPname_Sei.Text = patInfo.pName_Sei
                 txtPname_Mei.Text = patInfo.pName_Mei
-                timPbirth.Text = strMid(patInfo.pBirth, 1, 4) & "/" & strMid(patInfo.pBirth, 5, 2) & "/" & strMid(patInfo.pBirth, 7, 2)
+                If IsNumeric(patInfo.pBirth) Then
+                    timPbirth.Text = strMid(patInfo.pBirth, 1, 4) & "/" & strMid(patInfo.pBirth, 5, 2) & "/" & strMid(patInfo.pBirth, 7, 2)
+                End If
                 Select Case patInfo.pSex
                     Case "M"
                         cmbPsex.SelectedItem = "男"
